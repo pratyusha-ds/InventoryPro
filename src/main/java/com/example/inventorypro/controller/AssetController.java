@@ -1,7 +1,7 @@
 package com.example.inventorypro.controller;
 
 import com.example.inventorypro.model.Asset;
-import com.example.inventorypro.repository.AssetRepository;
+import com.example.inventorypro.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,16 +10,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/assets")
 public class AssetController {
+
     @Autowired
-private AssetRepository assetRepository;
+    private AssetService assetService;
 
     @GetMapping
-    public List<Asset> getAllAssets() {
-        return assetRepository.findAll();
+    public List<Asset> getAll() {
+        return assetService.getAllAssets();
     }
 
     @PostMapping
-    public Asset createAsset(@RequestBody Asset asset) {
-        return assetRepository.save(asset);
+    public Asset create(@RequestBody Asset asset) {
+        return assetService.saveAsset(asset);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        assetService.deleteAsset(id);
     }
 }
