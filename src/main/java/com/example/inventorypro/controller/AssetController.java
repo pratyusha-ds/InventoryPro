@@ -28,4 +28,9 @@ public class AssetController {
     public void delete(@PathVariable Long id) {
         assetService.deleteAsset(id);
     }
+
+    @GetMapping("/search")
+    public List<Asset> search(@RequestParam String name) {
+        return assetService.searchByName(name);
+    }
 }

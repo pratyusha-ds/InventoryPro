@@ -23,4 +23,8 @@ public class AssetService {
     public void deleteAsset(Long id) {
         assetRepository.deleteById(id);
     }
+
+    public List<Asset> searchByName(String name) {
+        return assetRepository.findByNameContainingIgnoreCase(name);
+    }
 }
